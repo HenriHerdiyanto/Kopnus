@@ -6,53 +6,66 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+# Job Portal API
 
-## About Laravel
+Sebuah API sistem manajemen rekrutmen yang dibangun dengan **Laravel 13**. Sistem ini mendukung alur kerja antara Employer (perusahaan) dan Freelancer, serta fitur manajemen pengguna oleh Admin.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Fitur Utama
+- **Autentikasi**: Sistem login dan register dengan token (Sanctum).
+- **Manajemen User**: CRUD user dengan pembagian role (Admin, Employer, Freelancer).
+- **Manajemen Job**: Employer dapat membuat, mengedit, dan menghapus lowongan pekerjaan.
+- **Sistem Pelamaran**: Freelancer dapat melamar pekerjaan dengan mengunggah CV (PDF).
+- **Status Lamaran**: Employer dapat melihat daftar pelamar dan melakukan aksi Accept/Reject.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Cara Menjalankan
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
 
-## Learning Laravel
+1. **Clone Repository**
+   ```bash
+   git clone <url-repository-anda>
+   cd <nama-folder>
+2. **Install Dependencies**
+   composer install
+3. **Konfigurasi Environment**
+sesuaikan .env anda dan php artisan key:generate
+4. **Jalankan Migrasi & Seeder**
+   php artisan migrate:fresh --seed
+5. **Jalankan Server**
+   php artisan serve
+## List Endpoints
+1. Autentikasi <br>
+    Method,Endpoint,Deskripsi <br>
+    POST,/login,Login pengguna <br>
+    POST,/register,Daftar user baru <br>
+2. User Management <br>
+    Method,Endpoint,Akses <br>
+    GET,/users,List semua user <br>
+    DELETE,/users/{id},Hapus user (Admin) <br>
+3. Job Management <br>
+    Method,Endpoint,Deskripsi <br>
+    POST,/jobs,Posting lowongan baru <br>
+    GET,/jobs,List semua lowongan <br>
+    GET,/jobs/my,List lowongan milik employer <br>
+    GET,/jobs/{id},Detail lowongan <br>
+    PUT,/jobs/{id},Update lowongan <br>
+    DELETE,/jobs/{id},Hapus lowongan <br>
+4. Application Management <br>
+    Method,Endpoint,Deskripsi <br>
+    POST,/jobs/{id}/apply,Kirim lamaran (Upload CV) <br>
+    GET,/jobs/{id}/applicants,Lihat list pelamar <br>
+    PATCH,/applications/{id}/status,Update status (Accept/Reject) <br>
+## Catatan Penggunaan
+Header Wajib: Untuk semua endpoint yang membutuhkan akses, sertakan Header: <br>
+Authorization: Bearer {token_anda} <br>
+Accept: application/json <br><br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Upload CV: <br>
+Untuk endpoint POST /jobs/{id}/apply, gunakan format form-data. <br>
+Key: cv, Type: file, Value: [pilih file pdf] <br><br>
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
-```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Status Update: <br>
+Untuk PATCH /applications/{id}/status, kirimkan JSON body: <br>
+{
+  "status": "accepted"
+}
