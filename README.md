@@ -10,14 +10,14 @@
 
 Sebuah API sistem manajemen rekrutmen yang dibangun dengan **Laravel 13**. Sistem ini mendukung alur kerja antara Employer (perusahaan) dan Freelancer, serta fitur manajemen pengguna oleh Admin.
 
-## 🚀 Fitur Utama
+## Fitur Utama
 - **Autentikasi**: Sistem login dan register dengan token (Sanctum).
 - **Manajemen User**: CRUD user dengan pembagian role (Admin, Employer, Freelancer).
 - **Manajemen Job**: Employer dapat membuat, mengedit, dan menghapus lowongan pekerjaan.
 - **Sistem Pelamaran**: Freelancer dapat melamar pekerjaan dengan mengunggah CV (PDF).
 - **Status Lamaran**: Employer dapat melihat daftar pelamar dan melakukan aksi Accept/Reject.
 
-## 🛠️ Cara Menjalankan
+## Cara Menjalankan
 
 Ikuti langkah-langkah berikut untuk menjalankan proyek ini secara lokal:
 
